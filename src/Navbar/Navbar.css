@@ -1,0 +1,24 @@
+.navBar{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    background-color: dimgray;
+    align-items: center;
+}
+.navBar .links{
+    margin-left: auto;
+    margin-right: 20px;
+}
+.navBar h1{
+    margin-left: 20px;
+}
+.navBar a{
+    margin-left: 16px;
+    text-decoration: none;
+    color: white;
+}
+.navBar a:hover{
+    transition: all 1s;
+    color: blue;
+}
+
