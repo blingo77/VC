@@ -12,6 +12,14 @@ const Login = ({setIsAuthoirzed}) => {
             console.log(res)
             localStorage.setItem('isAuthoirzed', true)
             setIsAuthoirzed(true)
+
+            const pfp = res.user.photoURL
+
+            localStorage.setItem('pfp', pfp)
+
+        })
+        .catch((e) => {
+            console.log(e)
         })
 
     }
@@ -21,7 +29,6 @@ const Login = ({setIsAuthoirzed}) => {
       <button type="button" class="login-with-google-btn" onClick={signInWithGoogle}>
         Sign in with Google
       </button>
-      <button onClick={signInWithGoogle}>Sign in</button>
     </>
   );
 };

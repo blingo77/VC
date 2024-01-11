@@ -21,4 +21,18 @@
     transition: all 1s;
     color: blue;
 }
-
+.navBar .logout-button{
+    margin-left: 16px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(212, 106, 106);
+    color: white;
+}
+.pfp-image{
+    margin-left: 5px;
+    width: 3%;
+    margin-right: 20px;
+    border-radius: 50%;
+    
+}

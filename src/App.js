@@ -12,12 +12,12 @@ function App() {
 
     <Router>
     <div className="App">
-      <Navbar></Navbar>
+      <Navbar isAuthorized={isAuthorized} setIsAuthorized={setIsAuthoirzed}></Navbar>
 
       <Routes>
 
         <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login></Login>}/>
+        <Route path="/login" element={<Login setIsAuthoirzed={setIsAuthoirzed}></Login>}/>
 
       </Routes>
     </div>
