@@ -1,9 +1,12 @@
 import "./Login.css";
 import { signInWithPopup } from "firebase/auth";
 import {auth, provider} from '../../firebase-config/firebase'
+import { useNavigate } from "react-router-dom";
 
 
 const Login = ({setIsAuthoirzed}) => {
+
+    const navigate = useNavigate()
 
     const signInWithGoogle = () => {
 
@@ -16,6 +19,8 @@ const Login = ({setIsAuthoirzed}) => {
             const pfp = res.user.photoURL
 
             localStorage.setItem('pfp', pfp)
+
+          navigate('/')
 
         })
         .catch((e) => {

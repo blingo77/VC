@@ -3,6 +3,8 @@ import Navbar from "./Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import { useState } from "react";
+import Reviews from "./pages/Review/Review";
+import PostReview from "./pages/Review/PostReview";
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
 
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login setIsAuthoirzed={setIsAuthoirzed}></Login>}/>
+        <Route path='/reviews' element={<Reviews isAuthorized={isAuthorized}></Reviews>}/>
+        <Route path="/post-review" element={<PostReview isAuthorized={isAuthorized}></PostReview>}/>
 
       </Routes>
     </div>
