@@ -1,6 +1,6 @@
 import "./Login.css";
 import { signInWithPopup } from "firebase/auth";
-import {auth, provider} from '../../firebase'
+import {auth, provider} from '../../firebase-config/firebase'
 
 
 const Login = ({setIsAuthoirzed}) => {
