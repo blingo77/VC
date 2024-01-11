@@ -1,8 +1,13 @@
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import { useState } from "react";
 
 function App() {
+
+  const [isAuthorized, setIsAuthoirzed] = useState(localStorage.getItem('isAuthorized'))
+
   return (
 
     <Router>
@@ -10,7 +15,10 @@ function App() {
       <Navbar></Navbar>
 
       <Routes>
+
         <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login></Login>}/>
+
       </Routes>
     </div>
     </Router>
