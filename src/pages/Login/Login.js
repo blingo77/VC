@@ -17,8 +17,10 @@ const Login = ({setIsAuthoirzed}) => {
             setIsAuthoirzed(true)
 
             const pfp = res.user.photoURL
+            const uID = res.user.uid
 
             localStorage.setItem('pfp', pfp)
+            localStorage.setItem('uID', uID)
 
           navigate('/')
 

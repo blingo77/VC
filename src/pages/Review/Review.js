@@ -30,6 +30,7 @@ const Reviews = ({isAuthorized}) => {
             return (
                 <div className="post-container">
                     <h1>{post.title}</h1>
+                    <h2>{post.rateVal}</h2>
                     <p>{post.post}</p>
                     <h3>@ {post.author.name}</h3>
                     {isAuthorized && post.author.id === auth.currentUser.uid && <button onClick={() => {deletePost(post.id)}}>X</button>}
