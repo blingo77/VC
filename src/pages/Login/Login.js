@@ -33,9 +33,23 @@ const Login = ({setIsAuthoirzed}) => {
 
   return (
     <>
+    <div className="login-page-container">
+      <div className="login-card">
+        <div className="login-title">
+          <h1>Login</h1>
+        </div>
+        <div className="login-input">
+        <input placeholder="Email" className="email"></input><br></br>
+        <input placeholder="Password" className="password"/><br></br>
+        <button>Login</button>
+        </div>
+      <div className="google-btn">
       <button type="button" class="login-with-google-btn" onClick={signInWithGoogle}>
         Sign in with Google
       </button>
+      </div>
+      </div>
+      </div>
     </>
   );
 };

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
+import './Rant.css'
 
 const Rant = ({isAuthorized}) => {
 
@@ -21,11 +22,12 @@ const Rant = ({isAuthorized}) => {
         await deleteDoc(postDoc)
     }
     return (
-        <>
+        <div className="rant-page-container">
             <Link to="/post-rant">Post a Rant</Link>
 
             {postList.map((post) => {
                 return (
+                    
                     <div className="post-container">
                         <h1>{post.title}</h1>
                         <p>{post.rantPost}</p>
@@ -35,7 +37,7 @@ const Rant = ({isAuthorized}) => {
                     </div>
                 )
             })}
-        </>
+        </div>
     );
 }
 
