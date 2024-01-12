@@ -41,6 +41,7 @@ const PostReview = ({isAuthorized}) => {
             title : title,
             post: post,
             rateVal: rangeVal,
+            pfpURL: auth.currentUser.photoURL,
             author : {name: auth.currentUser.displayName, email : auth.currentUser.email, id : auth.currentUser.uid,
             }
         })

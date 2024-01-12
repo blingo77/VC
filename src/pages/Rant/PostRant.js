@@ -37,9 +37,9 @@ const PostRant = ({isAuthorized}) => {
         await addDoc(postsCollectionRef, {
             title: title,
             rantPost: rantPost,
+            pfpURL: auth.currentUser.photoURL,
             subject: subject,
-            author : {name: auth.currentUser.displayName, email : auth.currentUser.email, id : auth.currentUser.uid,
-            }
+            author_name: auth.currentUser.displayName
         })
 
         navigate('/rants')

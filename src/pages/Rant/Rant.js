@@ -29,6 +29,7 @@ const Rant = ({isAuthorized}) => {
                     <div className="post-container">
                         <h1>{post.title}</h1>
                         <p>{post.rantPost}</p>
+                        <img src={post.pfpURL}/>
                         <h3>@ {post.author_name}</h3>
                         {isAuthorized && localStorage.getItem('uID') === auth.currentUser.uid && <button onClick={() => {deletePost(post.id)}}>X</button>}
                     </div>

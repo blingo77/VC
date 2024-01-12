@@ -32,6 +32,7 @@ const Reviews = ({isAuthorized}) => {
                     <h1>{post.title}</h1>
                     <h2>{post.rateVal}</h2>
                     <p>{post.post}</p>
+                    <img src={post.pfpURL}/>
                     <h3>@ {post.author.name}</h3>
                     {isAuthorized && post.author.id === auth.currentUser.uid && <button onClick={() => {deletePost(post.id)}}>X</button>}
                 </div>
