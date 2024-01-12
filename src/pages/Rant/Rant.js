@@ -3,8 +3,9 @@ import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import './Rant.css'
+import PostLogo from '../../images/circle-plus-solid.svg'
 
-const Rant = ({isAuthorized}) => {
+const Rant = ({ isAuthorized }) => {
 
     const [postList, setPostList] = useState([])
     const postsCollectionRef = collection(db, 'rantPosts')
@@ -22,22 +23,36 @@ const Rant = ({isAuthorized}) => {
         await deleteDoc(postDoc)
     }
     return (
-        <div className="rant-page-container">
-            <Link to="/post-rant">Post a Rant</Link>
+        <>
+            <div className="post-rant">
+                <Link to="/post-rant" ><img src={PostLogo}></img></Link>
+            </div>
 
-            {postList.map((post) => {
-                return (
-                    
-                    <div className="post-container">
-                        <h1>{post.title}</h1>
-                        <p>{post.rantPost}</p>
-                        <img src={post.pfpURL}/>
-                        <h3>@ {post.author_name}</h3>
-                        {isAuthorized && localStorage.getItem('uID') === auth.currentUser.uid && <button onClick={() => {deletePost(post.id)}}>X</button>}
-                    </div>
-                )
-            })}
-        </div>
+            <div className="rant-page-container">
+
+                {postList.map((post) => {
+                    return (
+
+                        <div className="post-container">
+                            <div className="post-header">
+                                <div className="pfp">
+                                    <img src={post.pfpURL} />
+                                </div>
+                                <div className="title">
+                                    <h1>{post.title}</h1>
+                                </div>
+                                <div className="delete">
+                                    {isAuthorized && localStorage.getItem('uID') === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}>X</button>}
+                                </div>
+                            </div>
+                            <p>{post.rantPost}</p>
+                            <h3>@ {post.author_name}</h3>
+
+                        </div>
+                    )
+                })}
+            </div>
+        </>
     );
 }
 

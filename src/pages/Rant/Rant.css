@@ -1,0 +1,48 @@
+.big-container{
+    width: 100%;
+}
+.rant-page-container{
+    width: 100%;
+    height: auto;
+    background-color: aqua;
+    display: grid;
+    place-items: center;
+}
+.post-rant{
+    margin-top: 10px;
+    width: 10%;
+    height: auto;
+    margin-left: auto;
+}
+.post-rant img{
+    width: 50px;
+}
+.post-container{
+    width: 500px;
+    height: 400px;
+    background-color: antiquewhite;
+}
+.post-header{
+    width: 100%;
+    height: auto;
+    background-color: brown;
+    display: flex;
+}
+.title{
+    margin-left: auto;
+    margin-right: auto;
+    margin-right: 25px;
+    align-items: center;
+}
+.pfp img{
+    border-radius: 50%;
+    margin-left: 20px;
+    width: 60px;
+    margin-top: 10px;
+}
+.post-header .delete{
+    margin-left: auto;
+    margin-right: 20px;
+    width: 20px;
+    background-color: cadetblue;
+}
