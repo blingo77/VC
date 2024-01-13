@@ -15,7 +15,7 @@ const Rant = ({ isAuthorized }) => {
             const data = await getDocs(postsCollectionRef)
             setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         }
-        return () => getPosts()
+        getPosts()
     }, [])
 
     const deletePost = async (id) => {

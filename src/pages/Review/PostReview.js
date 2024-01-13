@@ -37,7 +37,7 @@ const PostReview = ({ isAuthorized }) => {
 
     // Submits the post to firebase-database
     const submitPost = async () => {
-        await addDoc(postsCollectionRef, {
+        const newPost = (postsCollectionRef, {
             title: title,
             post: post,
             rateVal: rangeVal,
@@ -46,7 +46,12 @@ const PostReview = ({ isAuthorized }) => {
                 name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
             }
         })
-        navigate('/reviews')
+        try{
+            await addDoc(postsCollectionRef, newPost)
+            navigate('/reviews')
+        }catch(e){
+            console.error(e)
+        }
     }
 
     // Handles if a user tries to access the page without being logged in

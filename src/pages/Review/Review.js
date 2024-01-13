@@ -11,11 +11,16 @@ const Reviews = ({ isAuthorized }) => {
 
     useEffect(() => {
         const getPosts = async () => { 
+            try{
             const data = await getDocs(postsCollectionRef)
             setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            }
+            catch(e){
+                console.log(e.message)
+            }
         }
 
-        return () => getPosts()
+        getPosts()
     }, [])
 
     const deletePost = async (id) => {
