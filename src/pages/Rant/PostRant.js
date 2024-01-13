@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
+import '../Rant-Review-Styles/Posts.css'
 
-const PostRant = ({isAuthorized}) => {
+const PostRant = ({ isAuthorized }) => {
 
     const navigate = useNavigate()
 
@@ -12,7 +13,7 @@ const PostRant = ({isAuthorized}) => {
     const [rantPost, setRantPost] = useState("")
 
     useEffect(() => {
-        if(!isAuthorized){
+        if (!isAuthorized) {
             navigate('/login')
         }
     })
@@ -31,7 +32,7 @@ const PostRant = ({isAuthorized}) => {
 
     }
 
-    const postsCollectionRef = collection(db,"rantPosts")
+    const postsCollectionRef = collection(db, "rantPosts")
 
     const submitPost = async () => {
         await addDoc(postsCollectionRef, {
@@ -45,20 +46,33 @@ const PostRant = ({isAuthorized}) => {
         navigate('/rants')
     }
 
-    return ( 
+    return (
         <>
-        <label htmlFor="title">Title: </label>
-        <input id="title" placeholder="Type..." onChange={handleTitleChange}></input><br></br>
 
-        <label htmlFor="subject">Subject</label>
-        <input id="subject" placeholder="subject..." onChange={handleSubjectChange}></input><br></br>
+            <div className="rant-review-post-container">
+                <div className="create-post-container">
+                    <div className="create-post-header">
+                        <div className="pfp">
+                            <img src={localStorage.getItem('pfp')} />
+                        </div>
+                        <div className="create-title">
+                            <input id="title" placeholder="Title..." onChange={handleTitleChange} maxLength="35"></input><br></br>
+                        </div>
+                    </div>
 
-        <label htmlFor="rant">Rant: </label>
-        <textarea id="rant" placeholder="Rant here..." rows="9" cols="60" onChange={handleRantChange}></textarea><br></br>
-
-        <button onClick={submitPost}>Post</button>
+                    <div className="create-subject">
+                        <input id="subject" placeholder="Subject..." onChange={handleSubjectChange}></input><br></br>
+                    </div>
+                    <div className="create-body">
+                        <textarea id="rant" placeholder="Rant here..."  onChange={handleRantChange}></textarea><br></br>
+                    </div>
+                    <div className="post-button">
+                        <button onClick={submitPost}>Post</button>
+                    </div>
+                </div>
+            </div>
         </>
-     );
+    );
 }
- 
+
 export default PostRant;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import {addDoc, collection} from 'firebase/firestore'
-import {db, auth} from '../../firebase-config/firebase'
+import { addDoc, collection } from 'firebase/firestore'
+import { db, auth } from '../../firebase-config/firebase'
 import { useNavigate } from "react-router-dom";
 
 /*
 Page for handling creation of new review postsr
 */
 
-const PostReview = ({isAuthorized}) => {
+const PostReview = ({ isAuthorized }) => {
 
     // Page Redirection
     const navigate = useNavigate()
@@ -17,7 +17,7 @@ const PostReview = ({isAuthorized}) => {
     const [post, setPost] = useState("")
     const [title, setTitle] = useState("")
 
-// ----------- OnChange Funcitons --------------------------
+    // ----------- OnChange Funcitons --------------------------
     const handleTitleChange = (event) => {
         setTitle(event.target.value)
     }
@@ -33,16 +33,17 @@ const PostReview = ({isAuthorized}) => {
     }
 
     const postsCollectionRef = collection(db, "reviewPosts")
-// --------------------------------------------------------------
+    // --------------------------------------------------------------
 
     // Submits the post to firebase-database
     const submitPost = async () => {
         await addDoc(postsCollectionRef, {
-            title : title,
+            title: title,
             post: post,
             rateVal: rangeVal,
             pfpURL: auth.currentUser.photoURL,
-            author : {name: auth.currentUser.displayName, email : auth.currentUser.email, id : auth.currentUser.uid,
+            author: {
+                name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
             }
         })
         navigate('/reviews')
@@ -50,32 +51,37 @@ const PostReview = ({isAuthorized}) => {
 
     // Handles if a user tries to access the page without being logged in
     useEffect(() => {
-        if(!isAuthorized){
+        if (!isAuthorized) {
             navigate('/login')
         }
     })
 
-    return ( 
-        <>
-        <label htmlFor="title">Title: </label>
-        <input id="title" placeholder="type..." onChange={handleTitleChange}/>
-
-        <br></br>
-        
-        <label htmlFor="rate">Rate: </label>
-        <input type="range"  id="rate"value={rangeVal} max="10" min="0" step="1" onChange={handleRangeChange}></input>
-
-        <br></br>
-
-        <label htmlFor="post">Post: </label>
-        <textarea id="post" placeholder="Type here..." rows="9" cols="60" onChange={handlePostChange}/>
-
-        <br></br>
-
-        <button onClick={submitPost}>Post</button>
-        </>
-
-     );
-}
+    return (
  
+        <div className="rant-review-post-container">
+        <div className="create-post-container">
+            <div className="create-post-header">
+                <div className="pfp">
+                    <img src={localStorage.getItem('pfp')} />
+                </div>
+                <div className="create-title">
+                    <input id="title" placeholder="Title..." onChange={handleTitleChange} maxLength="35"></input><br></br>
+                </div>
+            </div>
+
+            <div className="create-subject">
+                <input id="subject" type="range"placeholder="Subject..." onChange={handleRangeChange}></input><br></br>
+            </div>
+            <div className="create-body">
+                <textarea id="rant" placeholder="Rant here..."  onChange={handlePostChange}></textarea><br></br>
+            </div>
+            <div className="post-button">
+                <button onClick={submitPost}>Post</button>
+            </div>
+        </div>
+    </div>
+
+    );
+}
+
 export default PostReview;

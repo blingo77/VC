@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
-import './Rant.css'
+import '../Rant-Review-Styles/Rant-Review.css'
 import PostLogo from '../../images/circle-plus-solid.svg'
 
 const Rant = ({ isAuthorized }) => {
@@ -15,8 +15,8 @@ const Rant = ({ isAuthorized }) => {
             const data = await getDocs(postsCollectionRef)
             setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
         }
-        getPosts()
-    })
+        return () => getPosts()
+    }, [])
 
     const deletePost = async (id) => {
         const postDoc = doc(db, 'rantPosts', id)
@@ -28,7 +28,7 @@ const Rant = ({ isAuthorized }) => {
                 <Link to="/post-rant" ><img src={PostLogo}></img></Link>
             </div>
 
-            <div className="rant-page-container">
+            <div className="rant-review-page-container">
 
                 {postList.map((post) => {
                     return (
@@ -45,8 +45,9 @@ const Rant = ({ isAuthorized }) => {
                                     {isAuthorized && localStorage.getItem('uID') === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}>X</button>}
                                 </div>
                             </div>
+                            <h4>{post.subject}</h4>
                             <p>{post.rantPost}</p>
-                            <h3>@ {post.author_name}</h3>
+                            <h3>@{post.author_name}</h3>
 
                         </div>
                     )

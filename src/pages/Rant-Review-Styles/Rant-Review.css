@@ -1,10 +1,9 @@
 .big-container{
     width: 100%;
 }
-.rant-page-container{
+.rant-review-page-container{
     width: 100%;
     height: auto;
-    background-color: aqua;
     display: grid;
     place-items: center;
 }
@@ -18,16 +17,24 @@
     width: 50px;
 }
 .post-container{
-    width: 500px;
-    height: 400px;
-    background-color: antiquewhite;
+    width: 60%;
+    height: auto;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+.post-container p, h3, h4{
+    margin-left: 5px;
+
 }
 .post-header{
     width: 100%;
     height: auto;
-    background-color: brown;
     display: flex;
+    border-bottom: 1px solid rgb(116, 116, 116);
+    margin-top: 5px;
 }
+
 .title{
     margin-left: auto;
     margin-right: auto;
@@ -44,5 +51,5 @@
     margin-left: auto;
     margin-right: 20px;
     width: 20px;
-    background-color: cadetblue;
+    margin-top: 20px;
 }
