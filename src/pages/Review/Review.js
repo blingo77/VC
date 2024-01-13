@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import PostLogo from '../../images/circle-plus-solid.svg'
 
@@ -10,17 +10,11 @@ const Reviews = ({ isAuthorized }) => {
     const postsCollectionRef = collection(db, 'reviewPosts')
 
     useEffect(() => {
-        const getPosts = async () => { 
-            try{
-            const data = await getDocs(postsCollectionRef)
-            setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            }
-            catch(e){
-                console.log(e.message)
-            }
-        }
+        const unsubscribe = onSnapshot(postsCollectionRef, (snapshot) =>{
+            setPostList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
+        })
 
-        getPosts()
+        return () => unsubscribe()
     }, [])
 
     const deletePost = async (id) => {

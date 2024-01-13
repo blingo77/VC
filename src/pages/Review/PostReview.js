@@ -52,6 +52,7 @@ const PostReview = ({ isAuthorized }) => {
         }catch(e){
             console.error(e)
         }
+        navigate('/reviews')
     }
 
     // Handles if a user tries to access the page without being logged in
@@ -75,7 +76,7 @@ const PostReview = ({ isAuthorized }) => {
             </div>
 
             <div className="create-subject">
-                <input id="subject" type="range"placeholder="Subject..." onChange={handleRangeChange}></input><br></br>
+                <input id="subject" type="range"placeholder="Subject..." onChange={handleRangeChange} min="0" max="10" step="1"></input><br></br>
             </div>
             <div className="create-body">
                 <textarea id="rant" placeholder="Rant here..."  onChange={handlePostChange}></textarea><br></br>
