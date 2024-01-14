@@ -60,7 +60,7 @@ const PostReview = ({ isAuthorized }) => {
         if (!isAuthorized) {
             navigate('/login')
         }
-    })
+    }, [])
 
     return (
  

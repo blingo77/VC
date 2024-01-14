@@ -16,7 +16,7 @@ const PostRant = ({ isAuthorized }) => {
         if (!isAuthorized) {
             navigate('/login')
         }
-    })
+    }, [])
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value)
