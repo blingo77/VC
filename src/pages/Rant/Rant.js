@@ -4,9 +4,11 @@ import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import '../Rant-Review-Styles/Rant-Review.css'
 import PostLogo from '../../images/circle-plus-solid.svg'
+import Loading from "../../loading/Loading";
 
 const Rant = ({ isAuthorized }) => {
 
+    const [loading, setLoading] = useState(true)
     const [postList, setPostList] = useState([])
     const postsCollectionRef = collection(db, 'rantPosts')
 
@@ -14,6 +16,7 @@ const Rant = ({ isAuthorized }) => {
         const getPosts = async () => {
             const data = await getDocs(postsCollectionRef)
             setPostList(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            setLoading(false)
         }
         getPosts()
     }, [])
@@ -30,7 +33,7 @@ const Rant = ({ isAuthorized }) => {
 
             <div className="rant-review-page-container">
 
-                {postList.map((post) => {
+                {loading ? <Loading /> : postList.map((post) => {
                     return (
 
                         <div className="post-container">
@@ -42,7 +45,7 @@ const Rant = ({ isAuthorized }) => {
                                     <h1>{post.title}</h1>
                                 </div>
                                 <div className="delete">
-                                    {isAuthorized && localStorage.getItem('uID') === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}>X</button>}
+                                    {isAuthorized && post.author.id === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}>X</button>}
                                 </div>
                             </div>
                             <h4>{post.subject}</h4>

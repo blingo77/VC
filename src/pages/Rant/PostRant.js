@@ -40,7 +40,10 @@ const PostRant = ({ isAuthorized }) => {
             rantPost: rantPost,
             pfpURL: auth.currentUser.photoURL,
             subject: subject,
-            author_name: auth.currentUser.displayName
+            author_name: auth.currentUser.displayName,
+            author: {
+                name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
+            }
         })
 
         navigate('/rants')

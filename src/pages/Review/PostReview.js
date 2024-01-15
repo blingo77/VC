@@ -26,6 +26,8 @@ const PostReview = ({ isAuthorized }) => {
         const currentValue = parseInt(event.target.value, 10);
         setRangeVal(currentValue);
         console.log("Current value: " + currentValue);
+
+        return currentValue
     }
 
     const handlePostChange = (event) => {
@@ -76,7 +78,7 @@ const PostReview = ({ isAuthorized }) => {
             </div>
 
             <div className="create-subject">
-                <input id="subject" type="range"placeholder="Subject..." onChange={handleRangeChange} min="0" max="10" step="1"></input><br></br>
+                <input id="subject" type="range"placeholder="Subject..."min="0" max="10" step="1" onChange={handleRangeChange} ></input> <p>{rangeVal}/10</p><br></br>
             </div>
             <div className="create-body">
                 <textarea id="rant" placeholder="Rant here..."  onChange={handlePostChange}></textarea><br></br>
