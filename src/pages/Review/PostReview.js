@@ -16,6 +16,7 @@ const PostReview = ({ isAuthorized }) => {
     const [rangeVal, setRangeVal] = useState(0)
     const [post, setPost] = useState("")
     const [title, setTitle] = useState("")
+    
 
     // ----------- OnChange Funcitons --------------------------
     const handleTitleChange = (event) => {

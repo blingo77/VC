@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import '../Rant-Review-Styles/Posts.css'
-import Ghost from '../../images/ghost-solid.svg'
+import Ghost from '../../images/unknownpfp.jpg'
 
 const PostRant = ({ isAuthorized }) => {
 
@@ -46,7 +46,6 @@ const PostRant = ({ isAuthorized }) => {
         }
     }
 
-
     const postsCollectionRef = collection(db, "rantPosts")
 
     const submitPost = async () => {
@@ -73,7 +72,6 @@ const PostRant = ({ isAuthorized }) => {
                 })
         }
         
-
         navigate('/rants')
     }
 
@@ -84,7 +82,9 @@ const PostRant = ({ isAuthorized }) => {
                 <div className="create-post-container">
                     <div className="create-post-header">
                         <div className="pfp">
-                            <img src={localStorage.getItem('pfp')} />
+                            {isAnon ? 
+                            <img src={Ghost}/>: 
+                            <img src={localStorage.getItem('pfp')}/>}
                         </div>
                         <div className="create-title">
                             <input id="title" placeholder="Title..." onChange={handleTitleChange} maxLength="35"></input><br></br>
