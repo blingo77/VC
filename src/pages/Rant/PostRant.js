@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import '../Rant-Review-Styles/Posts.css'
+import Ghost from '../../images/ghost-solid.svg'
 
 const PostRant = ({ isAuthorized }) => {
 
     const navigate = useNavigate()
 
+    const [isAnon, setIsAnon] = useState(false)
     const [title, setTitle] = useState("")
     const [subject, setSubject] = useState("")
     const [rantPost, setRantPost] = useState("")
@@ -32,19 +34,45 @@ const PostRant = ({ isAuthorized }) => {
 
     }
 
+    const handleAnonymous = () => {
+        let checkbox = document.getElementById("anon-btn")
+
+        console.log(checkbox.checked)
+        if(checkbox.checked){
+            setIsAnon(true)
+        }
+        else{
+            setIsAnon(false)
+        }
+    }
+
+
     const postsCollectionRef = collection(db, "rantPosts")
 
     const submitPost = async () => {
-        await addDoc(postsCollectionRef, {
+
+        if(isAnon){await addDoc(postsCollectionRef, {
             title: title,
             rantPost: rantPost,
-            pfpURL: auth.currentUser.photoURL,
+            pfpURL: Ghost,
             subject: subject,
-            author_name: auth.currentUser.displayName,
             author: {
-                name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
-            }
-        })
+                name: "Anonymous", email: "Anonymous", id: auth.currentUser.uid,
+                }
+            })
+        }
+        else{
+            await addDoc(postsCollectionRef, {
+                title: title,
+                rantPost: rantPost,
+                pfpURL: auth.currentUser.photoURL,
+                subject: subject,
+                author: {
+                    name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
+                    }
+                })
+        }
+        
 
         navigate('/rants')
     }
@@ -68,6 +96,11 @@ const PostRant = ({ isAuthorized }) => {
                     </div>
                     <div className="create-body">
                         <textarea id="rant" placeholder="Rant here..."  onChange={handleRantChange}></textarea><br></br>
+                    </div>
+
+                    <div className="post-anonymous-button">
+                        <label htmlFor="anon-btn">Post anonymously: </label>
+                        <input type="checkbox" id="anon-btn" onChange={handleAnonymous}/>
                     </div>
                     <div className="post-button">
                         <button onClick={submitPost}>Post</button>
