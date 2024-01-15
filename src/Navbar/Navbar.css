@@ -12,12 +12,12 @@
 .navBar h1{
     margin-left: 20px;
 }
-.navBar a{
+.navBar .nav-link{
     margin-left: 16px;
     text-decoration: none;
     color: white;
 }
-.navBar a:hover{
+.navBar .nav-link:hover{
     transition: all 1s;
     color: blue;
 }
@@ -35,4 +35,10 @@
     margin-right: 20px;
     border-radius: 50%;
     
+}
+.title-link{
+    text-decoration: none;
+    cursor: pointer;
+    color: crimson;
+    text-shadow: 0px 0px 9px rgb(68, 32, 32);
 }

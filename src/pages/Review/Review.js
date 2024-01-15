@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getDocs, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import PostLogo from '../../images/circle-plus-solid.svg'
 import TrashIcon from '../../images/trash-solid.svg'
@@ -12,8 +12,11 @@ const Reviews = ({ isAuthorized }) => {
     const [loading, setLoading] = useState(true)
     const postsCollectionRef = collection(db, 'reviewPosts')
 
+    // Queries
+    const q = query(postsCollectionRef, orderBy('time', 'desc'))
+
     useEffect(() => {
-        const unsubscribe = onSnapshot(postsCollectionRef, (snapshot) =>{
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
             setPostList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
             setLoading(false)
         })
@@ -52,6 +55,7 @@ const Reviews = ({ isAuthorized }) => {
                         </div>
                         <h2>{post.rateVal}/10</h2>
                         <p>{post.post}</p>
+                        <h5>{post.date}</h5>
                         <h3>@{post.author.name}</h3>
                     </div>
                 )

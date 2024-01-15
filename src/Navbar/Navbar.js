@@ -16,13 +16,13 @@ const Navbar = ({isAuthorized, setIsAuthorized}) => {
 
     return ( 
         <div className="navBar">
-            <h1>Vegas Circle</h1>
+            <Link to="/" className='title-link'><h1>Vegas Circle</h1></Link>
 
             <div className="links">
-                <Link to='/'>Home</Link>
-                <Link to='/reviews'>Reviews</Link>
-                <Link to='/rants'>Rants</Link>
-                {!isAuthorized && <Link to='/login'>Login</Link>}
+                <Link to='/' className='nav-link'>Home</Link>
+                <Link to='/reviews' className='nav-link'>Reviews</Link>
+                <Link to='/rants' className='nav-link'>Rants</Link>
+                {!isAuthorized && <Link to='/login' className='nav-link'>Login</Link>}
                 {isAuthorized && <button className='logout-button' onClick={logout}>Logout</button>}
                 {/*<Link to='/signup'>SignUp</Link>*/}
             </div>

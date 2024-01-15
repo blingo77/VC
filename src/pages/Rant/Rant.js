@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getDocs, collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc } from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import '../Rant-Review-Styles/Rant-Review.css'
@@ -13,8 +13,11 @@ const Rant = ({ isAuthorized }) => {
     const [postList, setPostList] = useState([])
     const postsCollectionRef = collection(db, 'rantPosts')
 
+    //Queries
+    const q = query(postsCollectionRef, orderBy('time', 'desc'))
+
     useEffect(() => {
-        const unsubscribe = onSnapshot(postsCollectionRef, (snapshot) =>{
+        const unsubscribe = onSnapshot(q, (snapshot) =>{
             setPostList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
             setLoading(false)
         })
@@ -26,6 +29,18 @@ const Rant = ({ isAuthorized }) => {
         const postDoc = doc(db, 'rantPosts', id)
         await deleteDoc(postDoc)
     }
+
+    const addLikes = (id) =>{
+        const docRef = doc(db, 'rantPosts', id)
+
+        updateDoc(docRef, {
+            like: 1
+        })
+        .then(() => {
+            console.log('Liked')
+        })
+    }
+
     return (
         <>
             <div className="post-rant">
@@ -51,6 +66,9 @@ const Rant = ({ isAuthorized }) => {
                             </div>
                             <h4>{post.subject}</h4>
                             <p>{post.rantPost}</p>
+                            <h5>{post.date}</h5>
+                            <p>{post.like}</p>
+                            <button onClick={()=> addLikes(post.id)}>Like</button>
                             <h3>@{post.author.name}</h3>
 
                         </div>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp} from "firebase/firestore";
 import { db, auth } from "../../firebase-config/firebase";
 import '../Rant-Review-Styles/Posts.css'
 import Ghost from '../../images/unknownpfp.jpg'
@@ -13,6 +13,12 @@ const PostRant = ({ isAuthorized }) => {
     const [title, setTitle] = useState("")
     const [subject, setSubject] = useState("")
     const [rantPost, setRantPost] = useState("")
+
+    const postsCollectionRef = collection(db, "rantPosts")
+
+    let date = new Date()
+    let postDate = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`
+
 
     useEffect(() => {
         if (!isAuthorized) {
@@ -46,7 +52,6 @@ const PostRant = ({ isAuthorized }) => {
         }
     }
 
-    const postsCollectionRef = collection(db, "rantPosts")
 
     const submitPost = async () => {
 
@@ -55,8 +60,11 @@ const PostRant = ({ isAuthorized }) => {
             rantPost: rantPost,
             pfpURL: Ghost,
             subject: subject,
+            time : serverTimestamp(),
+            date: postDate,
+            like : 0,
             author: {
-                name: "Anonymous", email: "Anonymous", id: auth.currentUser.uid,
+                name: "Anonymous", email: "Anonymous@anon.com", id: auth.currentUser.uid,
                 }
             })
         }
@@ -66,6 +74,8 @@ const PostRant = ({ isAuthorized }) => {
                 rantPost: rantPost,
                 pfpURL: auth.currentUser.photoURL,
                 subject: subject,
+                time : serverTimestamp(),
+                date : postDate, 
                 author: {
                     name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
                     }
