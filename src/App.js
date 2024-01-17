@@ -7,6 +7,7 @@ import Reviews from "./pages/Rant-Review/Review/Review";
 import Rant from "./pages/Rant-Review/Rant/Rant";
 import PostReview from "./pages/Rant-Review/Review/PostReview";
 import PostRant from "./pages/Rant-Review/Rant/PostRant";
+import News from "./pages/News/News";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home/>}/>
+        <Route path="/news" element={<News/>}></Route>
         <Route path="/login" element={<Login setIsAuthoirzed={setIsAuthoirzed}></Login>}/>
         <Route path='/reviews' element={<Reviews isAuthorized={isAuthorized}></Reviews>}/>
         <Route path='/rants' element={<Rant isAuthorized={isAuthorized}></Rant>}/>
