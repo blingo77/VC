@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection, serverTimestamp} from "firebase/firestore";
-import { db, auth } from "../../firebase-config/firebase";
-import '../Rant-Review-Styles/Posts.css'
-import Ghost from '../../images/unknownpfp.jpg'
+import { db, auth } from "../../../firebase-config/firebase";
+import '../Posts.css'
+import Ghost from '../../../images/unknownpfp.jpg'
 
 const PostRant = ({ isAuthorized }) => {
 
@@ -18,7 +18,6 @@ const PostRant = ({ isAuthorized }) => {
 
     let date = new Date()
     let postDate = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`
-
 
     useEffect(() => {
         if (!isAuthorized) {
@@ -37,6 +36,7 @@ const PostRant = ({ isAuthorized }) => {
 
     const handleRantChange = (event) => {
         setRantPost(event.target.value)
+        console.log(rantPost.length)
 
     }
 
@@ -110,7 +110,7 @@ const PostRant = ({ isAuthorized }) => {
 
                     <div className="post-anonymous-button">
                         <label htmlFor="anon-btn">Post anonymously: </label>
-                        <input type="checkbox" id="anon-btn" onChange={handleAnonymous}/>
+                        <input  type="checkbox" id="anon-btn" onChange={handleAnonymous}/>
                     </div>
                     <div className="post-button">
                         <button onClick={submitPost}>Post</button>

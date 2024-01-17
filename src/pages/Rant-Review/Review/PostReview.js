@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import { db, auth } from '../../firebase-config/firebase'
+import { db, auth } from '../../../firebase-config/firebase'
 import { useNavigate } from "react-router-dom";
 
 /*
@@ -17,6 +17,11 @@ const PostReview = ({ isAuthorized }) => {
     const [post, setPost] = useState("")
     const [title, setTitle] = useState("")
     const postsCollectionRef = collection(db, "reviewPosts")
+
+    
+    let date = new Date()
+    let postDate = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`
+
 
     // ----------- OnChange Funcitons --------------------------
     const handleTitleChange = (event) => {
@@ -36,10 +41,6 @@ const PostReview = ({ isAuthorized }) => {
     }
 
     // --------------------------------------------------------------
-
-    let date = new Date()
-    let postDate = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`
-
 
     // Submits the post to firebase-database
     const submitPost = async () => {

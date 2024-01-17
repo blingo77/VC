@@ -3,10 +3,10 @@ import Navbar from "./Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import { useState } from "react";
-import Reviews from "./pages/Review/Review";
-import Rant from "./pages/Rant/Rant";
-import PostReview from "./pages/Review/PostReview";
-import PostRant from "./pages/Rant/PostRant";
+import Reviews from "./pages/Rant-Review/Review/Review";
+import Rant from "./pages/Rant-Review/Rant/Rant";
+import PostReview from "./pages/Rant-Review/Review/PostReview";
+import PostRant from "./pages/Rant-Review/Rant/PostRant";
 
 function App() {
 

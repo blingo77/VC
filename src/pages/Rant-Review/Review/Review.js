@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc, onSnapshot, query, where, orderBy } from "firebase/firestore";
-import { db, auth } from "../../firebase-config/firebase";
-import PostLogo from '../../images/circle-plus-solid.svg'
-import TrashIcon from '../../images/trash-solid.svg'
-import Loading from "../../loading/Loading";
+import { db, auth } from "../../../firebase-config/firebase";
+import PostLogo from '../../../images/circle-plus-solid.svg'
+import TrashIcon from '../../../images/trash-solid.svg'
+import Loading from "../../../loading/Loading";
 
 const Reviews = ({ isAuthorized }) => {
 

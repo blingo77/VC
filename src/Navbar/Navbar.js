@@ -19,7 +19,7 @@ const Navbar = ({isAuthorized, setIsAuthorized}) => {
             <Link to="/" className='title-link'><h1>Vegas Circle</h1></Link>
 
             <div className="links">
-                <Link to='/' className='nav-link'>Home</Link>
+                <Link to='#' className='nav-link'>News</Link>
                 <Link to='/reviews' className='nav-link'>Reviews</Link>
                 <Link to='/rants' className='nav-link'>Rants</Link>
                 {!isAuthorized && <Link to='/login' className='nav-link'>Login</Link>}

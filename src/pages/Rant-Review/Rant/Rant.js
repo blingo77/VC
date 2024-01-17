@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { getDocs, collection, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc } from "firebase/firestore";
-import { db, auth } from "../../firebase-config/firebase";
+import { db, auth } from "../../../firebase-config/firebase";
 import { useEffect, useState } from "react";
-import '../Rant-Review-Styles/Rant-Review.css'
-import PostLogo from '../../images/circle-plus-solid.svg'
-import TrashIcon from '../../images/trash-solid.svg'
-import Loading from "../../loading/Loading";
+import '../Rant-Review.css'
+import PostLogo from '../../../images/circle-plus-solid.svg'
+import TrashIcon from '../../../images/trash-solid.svg'
+import Loading from "../../../loading/Loading";
 
 const Rant = ({ isAuthorized }) => {
 
@@ -18,10 +18,11 @@ const Rant = ({ isAuthorized }) => {
 
     useEffect(() => {
         const unsubscribe = onSnapshot(q, (snapshot) =>{
+
             setPostList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
             setLoading(false)
-        })
-
+            })
+    
         return () => unsubscribe()
     }, [])
 
