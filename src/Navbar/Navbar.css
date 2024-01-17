@@ -11,7 +11,7 @@
     margin-right: 20px;
 }
 .navBar h1{
-    margin-left: 20px;
+    margin-left: 10px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 .navBar .nav-link{
@@ -43,4 +43,7 @@
     text-decoration: none;
     cursor: pointer;
     color: rgb(255, 255, 255);
+}
+.navBar img{
+    margin-left: 10px;
 }

@@ -2,6 +2,7 @@ import './Navbar.css'
 import { Link } from 'react-router-dom';
 import {signOut} from 'firebase/auth'
 import {auth} from '../firebase-config/firebase'
+import vcLogo from '../images/VC-Logo-White.svg'
 
 const Navbar = ({isAuthorized, setIsAuthorized}) => {
 
@@ -16,7 +17,13 @@ const Navbar = ({isAuthorized, setIsAuthorized}) => {
 
     return ( 
         <div className="navBar">
-            <Link to="/" className='title-link'><h1>Vegas Circle</h1></Link>
+            
+            <img width="3%"src={vcLogo}></img>
+            
+
+            <Link to="/" className='title-link'>
+                <h1>Vegas Circle</h1>
+            </Link>
 
             <div className="links">
                 <Link to='#' className='nav-link'>News</Link>
