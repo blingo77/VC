@@ -17,6 +17,7 @@ const News = () => {
       })
       .then((data) => {
         setNewsArticles(data.articles);
+        console.log(data)
       })
       .catch((e) => {
         console.log(e);

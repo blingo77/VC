@@ -1,43 +1,77 @@
-import React from 'react';
-import './Map.css';
+"use client";
 
-class Map extends React.Component {
-  componentDidMount() {
-    const script = document.createElement('script');
-    script.src = `https://maps.googleapis.com/maps/api/js?key=AIzaSyAUCSgCxCbZBXR1o8L5gy2cjJ0VnaO1OEY&callback=initMap`;
-    script.async = true;
-    script.defer = true; // Ensure the script is deferred
+import React, { useEffect, useState } from "react";
+import "./Map.css";
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  Pin,
+  InfoWindow,
+} from "@vis.gl/react-google-maps";
 
-    script.onerror = () => {
-      console.error('Error loading Google Maps API script');
-    };
 
-    document.body.appendChild(script);
 
-    script.onload = () => {
-      if (!window.google) {
-        console.error('Google Maps API failed to load');
-      } else {
-        this.initMap();
-      }
-    };
-  }
+const Maps = () => {
+  const pos = { lat: 36.1716, lng: -115.1391 };
+  const [open, setOpen] = useState(false);
+  const [searchPos, setSearchPos] = useState({lat: 36.1716, lng: -115.1391})
 
-  initMap() {
-    // Your map initialization code here
-    const map = new window.google.maps.Map(document.getElementById('map'), {
-      center: { lat: 36.17158889770508, lng: -115.13925170898438 },
-      zoom: 12,
-    });
-  }
+ 
+function search(){
 
-  render() {
-    return (
-      <div id="map">
-        {/* Google Map will be rendered here */}
-      </div>
-    );
-  }
+    let location = document.getElementById('location-id').value
+
+        fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${location}&apiKey=4e3103f326a54fd9a8b163ab37edee9b`)
+        .then(data =>{
+            return data.json()
+        })
+        .then(data => {
+            console.log(data.features[0].properties)
+            console.log(data)
+        
+            let lan = data.features[0].properties.lat
+            let lon = data.features[0].properties.lon
+      
+            setSearchPos({lat: lan, lng: lon})
+    
+            console.log(lan)
+            console.log(lon)
+    
+            
+        })
+        .catch(e => {console.log(e)})
 }
+  
+  return (
+    <>
+    <div className="main-map-container">
+      <APIProvider apiKey="AIzaSyAUCSgCxCbZBXR1o8L5gy2cjJ0VnaO1OEY">
+        <div className="map-container">
+          <Map zoom={11} center={searchPos} mapId="d075fb289be0f43e">
+            <AdvancedMarker position={searchPos} onClick={() => setOpen(true)}>
+              <Pin
+                background={"lightblue"}
+                borderColor={"blue"}
+                glyphColor={"white"}
+              />
+            </AdvancedMarker>
 
-export default Map;
+            {open && (
+              <InfoWindow onCloseClick={() => setOpen(false)} position={pos}>
+                <p>Welcome to Las Vegas</p>
+              </InfoWindow>
+            )}
+          </Map>
+        </div>
+      </APIProvider>
+      <div className="map-search-container">
+        <input placeholder="Search" id="location-id" ></input>
+        <button onClick={search}>Seach</button>
+      </div>
+      </div>
+    </>
+  );
+};
+
+export default Maps;
