@@ -1,7 +1,7 @@
 import "./NewsCard.css";
 import { Link } from "react-router-dom";
 
-const NewsCard = ({ Title, Text, URL, IMG, Author, Source }) => {
+const NewsCard = ({ Title, Text, URL, IMG, Author, Source, Date }) => {
   return (
     <>
       <Link to={URL} target="_blank">
@@ -18,6 +18,7 @@ const NewsCard = ({ Title, Text, URL, IMG, Author, Source }) => {
           <div className="news-card-text-container">
             <p>{Text}</p>
           </div>
+
         </div>
       </Link>
     </>

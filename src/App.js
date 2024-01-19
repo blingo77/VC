@@ -8,6 +8,7 @@ import Rant from "./pages/Rant-Review/Rant/Rant";
 import PostReview from "./pages/Rant-Review/Review/PostReview";
 import PostRant from "./pages/Rant-Review/Rant/PostRant";
 import News from "./pages/News/News";
+import Map from "./pages/Map/Map";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home/>}/>
+        <Route path="/Map" element={<Map/>}></Route>
         <Route path="/news" element={<News/>}></Route>
         <Route path="/login" element={<Login setIsAuthoirzed={setIsAuthoirzed}></Login>}/>
         <Route path='/reviews' element={<Reviews isAuthorized={isAuthorized}></Reviews>}/>

@@ -19,6 +19,8 @@
 }
 .news-card-img-container img{
     width: 100%;    
+    border-radius: 10px;
+    border: 0px solid black;
 }
 .news-card-title-container{
     width: 100%;

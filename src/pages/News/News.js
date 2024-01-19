@@ -16,7 +16,6 @@ const News = () => {
         return data.json();
       })
       .then((data) => {
-        console.log(data);
         setNewsArticles(data.articles);
       })
       .catch((e) => {
@@ -37,6 +36,7 @@ const News = () => {
                 Text={article.content}
                 Author={article.author}
                 Source={article.source.name}
+                Date={article.publishedAt}
               />
             </>
           );
