@@ -14,13 +14,13 @@ import {
 
 const Maps = () => {
   const pos = { lat: 36.1716, lng: -115.1391 };
-  const [open, setOpen] = useState(false);
   const [searchPos, setSearchPos] = useState({lat: 36.1716, lng: -115.1391})
 
  
 function search(){
 
     let location = document.getElementById('location-id').value
+    console.log(location)
 
         fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${location}&apiKey=4e3103f326a54fd9a8b163ab37edee9b`)
         .then(data =>{
@@ -37,7 +37,6 @@ function search(){
     
             console.log(lan)
             console.log(lon)
-    
             
         })
         .catch(e => {console.log(e)})
@@ -49,7 +48,7 @@ function search(){
       <APIProvider apiKey="AIzaSyAUCSgCxCbZBXR1o8L5gy2cjJ0VnaO1OEY">
         <div className="map-container">
           <Map zoom={11} center={searchPos} mapId="d075fb289be0f43e">
-            <AdvancedMarker position={searchPos} onClick={() => setOpen(true)}>
+            <AdvancedMarker position={searchPos}>
               <Pin
                 background={"lightblue"}
                 borderColor={"blue"}
@@ -57,17 +56,12 @@ function search(){
               />
             </AdvancedMarker>
 
-            {open && (
-              <InfoWindow onCloseClick={() => setOpen(false)} position={pos}>
-                <p>Welcome to Las Vegas</p>
-              </InfoWindow>
-            )}
           </Map>
         </div>
       </APIProvider>
       <div className="map-search-container">
         <input placeholder="Search" id="location-id" ></input>
-        <button onClick={search}>Seach</button>
+        <button onClick={search}>Seaech</button>
       </div>
       </div>
     </>
