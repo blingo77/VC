@@ -1,7 +1,7 @@
 .card-container{
     background-color: white;
     width: 55vh;
-    height: 65vh;
+    height: 70vh;
     border: 2px solid black;
     border-radius: 20px;
 }
@@ -31,6 +31,7 @@
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    margin-bottom: -15px;
 }
 .card-text-container p{
     font-size: 17px;
