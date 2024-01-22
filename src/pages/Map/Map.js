@@ -61,7 +61,7 @@ function search(){
       </APIProvider>
       <div className="map-search-container">
         <input placeholder="Search" id="location-id" ></input>
-        <button onClick={search}>Seaech</button>
+        <button onClick={search}>Search</button>
       </div>
       </div>
     </>
