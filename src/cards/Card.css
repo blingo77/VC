@@ -1,13 +1,13 @@
 .card-container{
     background-color: white;
     width: 55vh;
-    height: 65vh;
+    height: 70vh;
     border: 2px solid black;
     border-radius: 20px;
 }
 .card-img-container{
     width: 60%;
-    height: 200px;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -22,18 +22,16 @@
     height: auto;
     text-align: center;
 }
-.card-title-container h1{
-    margin-left: 5px;
-}
 .card-text-container{
     width: 80%;
     height: auto;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    margin-bottom: -15px;
 }
 .card-text-container p{
-    font-size: 17px;
+    font-size: 2vh;
 }
 .card-button-container{
     width: auto;
