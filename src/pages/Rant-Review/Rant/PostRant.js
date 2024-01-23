@@ -63,6 +63,7 @@ const PostRant = ({ isAuthorized }) => {
             time : serverTimestamp(),
             date: postDate,
             like : 0,
+            likedBy: [],
             author: {
                 name: "Anonymous", email: "Anonymous@anon.com", id: auth.currentUser.uid,
                 }
@@ -76,6 +77,8 @@ const PostRant = ({ isAuthorized }) => {
                 subject: subject,
                 time : serverTimestamp(),
                 date : postDate, 
+                like : 0,
+                likedBy: [],
                 author: {
                     name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
                     }

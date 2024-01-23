@@ -61,3 +61,13 @@
     transform: scale(1.2);
     cursor: pointer;
 }
+.like-button{
+    width: 5%;
+    margin-left: 10px;
+}
+.like-button img{
+    width: 90%;
+}
+.like-button img:hover{
+    color: blueviolet;
+}
