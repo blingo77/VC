@@ -36,50 +36,54 @@ const Rant = ({ isAuthorized }) => {
 
     const addLikes = (id) =>{
 
-        getLikedId(id)
+        const docRef = doc(db, 'rantPosts', id)
+
+        updateDoc(docRef, {
+            like: increment(1),
+            likedBy: arrayUnion(auth.currentUser.uid)
+        })
+        .then(() => {
+            console.log('Liked')
+        })
+    }
+
+    const getIfLiked = (id) =>{
+
+        const docRef = doc(db, 'rantPosts', id)
+        let liked = false
 
         if(!isAuthorized){
             naviagte('/login')
         }
         else{
-
-            const docRef = doc(db, 'rantPosts', id)
-
-            updateDoc(docRef, {
-                like: increment(1),
-                likedBy: arrayUnion(auth.currentUser.uid)
-            })
-            .then(() => {
-                console.log('Liked')
+            getDoc(docRef)
+            .then((docSnapshot) => {
+                if(docSnapshot.exists){
+    
+                    const data = docSnapshot.data()
+                    
+                    console.log(data)
+                    data.likedBy.forEach(likedByID => {
+                        if(auth.currentUser.uid === likedByID){
+                            document.getElementById(`post-${id}`).disabled = true
+                            liked = true
+                        }
+                    })
+    
+                    console.log(liked)
+                    
+                    // Keep in the then() function, it must wait for promise
+                    if(!liked){
+                        addLikes(id)
+                    }
+    
+                }else{
+                    console.log('Does Not exist')
+                }
             })
         }
-
     }
 
-    const getLikedId = (id) =>{
-
-        const docRef = doc(db, 'rantPosts', id)
-
-        getDoc(docRef)
-        .then((docSnapshot) => {
-            if(docSnapshot.exists){
-
-                const data = docSnapshot.data()
-                
-                console.log(data)
-                const array = []
-                data.likedBy.forEach(likedByID => {
-                    if(auth.currentUser.uid === likedByID){
-                        document.getElementById(`post-${id}`).disabled = true
-                    }
-                })
-
-            }else{
-                console.log('Does Not exist')
-            }
-        })
-
-    }
     return (
         <>
             <div className="post-rant">
@@ -106,8 +110,8 @@ const Rant = ({ isAuthorized }) => {
                             <h4>{post.subject}</h4>
                             <p>{post.rantPost}</p>
                             <h5>{post.date}</h5>
-                            <p>{post.like}</p>
-                            <button onClick={()=> {addLikes(post.id)}} id={`post-${post.id}`} className="like-button"><img src={likeButtonImg}/></button>
+                            <button onClick={()=> {getIfLiked(post.id)}} id={`post-${post.id}`} className="like-button"><img src={likeButtonImg}/></button>
+                            <p>{post.like} Likes</p>
                             <h3>@{post.author.name}</h3>
 
                         </div>
