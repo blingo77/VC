@@ -9,6 +9,7 @@ import PostReview from "./pages/Rant-Review/Review/PostReview";
 import PostRant from "./pages/Rant-Review/Rant/PostRant";
 import News from "./pages/News/News";
 import Maps from "./pages/Map/Map";
+import Footer from "./Footer/Footer";
 
 function App() {
 
@@ -33,6 +34,8 @@ function App() {
 
       </Routes>
     </div>
+
+      <Footer></Footer>
     </Router>
   );
 }
