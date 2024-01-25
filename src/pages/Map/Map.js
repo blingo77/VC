@@ -15,6 +15,7 @@ import {
 const Maps = () => {
   const pos = { lat: 36.1716, lng: -115.1391 };
   const [searchPos, setSearchPos] = useState({lat: 36.1716, lng: -115.1391})
+  const [searchList, setSearchList] = useState([])
 
  
 function search(){
@@ -34,6 +35,8 @@ function search(){
             let lon = data.features[0].properties.lon
       
             setSearchPos({lat: lan, lng: lon})
+            setSearchList(data.features)
+            console.log(searchList)
     
             console.log(lan)
             console.log(lon)
@@ -63,6 +66,15 @@ function search(){
         <div className="search-container">
           <input placeholder="Search" id="location-id" ></input>
           <button onClick={search}>Search</button>
+        </div>
+        <div className="search-list-container">
+          {searchList.map((searchItem) => {
+            return (
+              <>
+              <p>{searchItem.properties.lat}</p>
+              </>
+            )
+          })}
         </div>
       </div>
       </div>
