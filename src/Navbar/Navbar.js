@@ -34,7 +34,7 @@ const Navbar = ({isAuthorized, setIsAuthorized}) => {
                 {isAuthorized && <button className='logout-button' onClick={logout}>Logout</button>}
                 {/*<Link to='/signup'>SignUp</Link>*/}
             </div>
-            {isAuthorized && <img src={localStorage.getItem("pfp")} className='pfp-image'></img>}
+            {isAuthorized && <img src={localStorage.getItem("pfp")} className='pfp-image' onError={() => { return (<img src={vcLogo}/>)}}></img>}
 
         </div>
      );

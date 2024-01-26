@@ -22,6 +22,7 @@
 .search-container{
     width: 100%;
     height: auto;
+    margin-bottom: 1vh;
 }
 .search-container input{
     width: 80%;
@@ -40,4 +41,15 @@
     cursor: pointer;
     background-color: rgb(16, 102, 184);
     color: white;
+}
+.location-results-container{
+    height: auto;
+}
+.location-results-container button{
+    width: 50vh;
+    background-color: white;
+    border: none;
+}
+.location-results-container button:hover{
+    background-color: rgb(209, 209, 209);
 }

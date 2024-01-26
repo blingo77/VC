@@ -45,6 +45,10 @@ function search(){
         .catch(e => {console.log(e)})
 }
   
+function locationResultsSearch(lat, lng){
+  setSearchPos({lat : lat, lng : lng})
+}
+
   return (
     <>
     <div className="main-map-container">
@@ -67,15 +71,20 @@ function search(){
           <input placeholder="Search" id="location-id" ></input>
           <button onClick={search}>Search</button>
         </div>
+
         <div className="search-list-container">
           {searchList.map((searchItem) => {
             return (
-              <>
-              <p>{searchItem.properties.lat}</p>
-              </>
+              <div className="location-results-container">
+              <button onClick={() => locationResultsSearch(searchItem.properties.lat, searchItem.properties.lon)}>
+                <h2>{searchItem.properties.address_line1}</h2>
+                <p>{searchItem.properties.address_line2}</p>
+                </button>
+              </div>
             )
           })}
         </div>
+
       </div>
       </div>
     </>

@@ -18,10 +18,8 @@ const PostReview = ({ isAuthorized }) => {
     const [title, setTitle] = useState("")
     const postsCollectionRef = collection(db, "reviewPosts")
 
-    
     let date = new Date()
     let postDate = `${date.getUTCMonth() + 1}/${date.getUTCDate()}/${date.getFullYear()}`
-
 
     // ----------- OnChange Funcitons --------------------------
     const handleTitleChange = (event) => {
@@ -45,7 +43,6 @@ const PostReview = ({ isAuthorized }) => {
     // Submits the post to firebase-database
     const submitPost = async () => {
 
-
         const newPost = (postsCollectionRef, {
             title: title,
             post: post,
@@ -53,6 +50,8 @@ const PostReview = ({ isAuthorized }) => {
             pfpURL: auth.currentUser.photoURL,
             time : serverTimestamp(),
             date : postDate,
+            liked: 0,
+            likedBy: [],
             author: {
                 name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
             }
