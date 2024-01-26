@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { getDocs, getDoc, collection, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc, increment, FieldValue, arrayUnion } from "firebase/firestore";
+import { getDocs, getDoc, collection, deleteDoc, doc, onSnapshot, query, orderBy, updateDoc, increment, FieldValue, arrayUnion, arrayRemove } from "firebase/firestore";
 import { db, auth } from "../../../firebase-config/firebase";
 import { useEffect, useState,  } from "react";
 import '../Rant-Review.css'
@@ -47,6 +47,18 @@ const Rant = ({ isAuthorized }) => {
         })
     }
 
+    const decrementLike = (id) => {
+        const docRef = doc(db, 'rantPosts', id)
+
+        updateDoc(docRef, {
+            like: increment(-1),
+            likedBy: arrayRemove(auth.currentUser.uid)
+        })
+        .then(() => {
+            console.log('Removed Like')
+        })
+    }
+
     const getIfLiked = (id) =>{
 
         const docRef = doc(db, 'rantPosts', id)
@@ -65,7 +77,6 @@ const Rant = ({ isAuthorized }) => {
                     console.log(data)
                     data.likedBy.forEach(likedByID => {
                         if(auth.currentUser.uid === likedByID){
-                            document.getElementById(`post-${id}`).disabled = true
                             liked = true
                         }
                     })
@@ -75,6 +86,10 @@ const Rant = ({ isAuthorized }) => {
                     // Keep in the then() function, it must wait for promise
                     if(!liked){
                         addLikes(id)
+                    }
+                    else{
+                        decrementLike(id)
+                        liked = false
                     }
     
                 }else{
