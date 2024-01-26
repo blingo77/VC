@@ -49,7 +49,14 @@
     width: 50vh;
     background-color: white;
     border: none;
+    text-align: center;
 }
 .location-results-container button:hover{
     background-color: rgb(209, 209, 209);
+}
+.search-logo{
+    width: 50%;
+}
+.search-logo:hover{
+    transform: scale(1.5);
 }

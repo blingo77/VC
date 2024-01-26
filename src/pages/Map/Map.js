@@ -9,7 +9,7 @@ import {
   Pin,
   InfoWindow,
 } from "@vis.gl/react-google-maps";
-
+import searchLogo from '../../images/search-logo.svg'
 
 
 const Maps = () => {
@@ -69,7 +69,7 @@ function locationResultsSearch(lat, lng){
       <div className="map-search-container">
         <div className="search-container">
           <input placeholder="Search" id="location-id" ></input>
-          <button onClick={search}>Search</button>
+          <button onClick={search}><img className="search-logo" src={searchLogo} /></button>
         </div>
 
         <div className="search-list-container">
