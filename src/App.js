@@ -10,6 +10,7 @@ import PostRant from "./pages/Rant-Review/Rant/PostRant";
 import News from "./pages/News/News";
 import Maps from "./pages/Map/Map";
 import Footer from "./Footer/Footer";
+import FullRant from "./pages/Rant-Review/Rant/FullRant";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/rants' element={<Rant isAuthorized={isAuthorized}></Rant>}/>
         <Route path="/post-review" element={<PostReview isAuthorized={isAuthorized}></PostReview>}/>
         <Route path="/post-rant" element={<PostRant isAuthorized={isAuthorized}></PostRant>}/>
+        <Route path="/rant/:id" element={<FullRant></FullRant>}></Route>
 
       </Routes>
     </div>

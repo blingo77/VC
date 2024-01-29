@@ -110,6 +110,7 @@ const Rant = ({ isAuthorized }) => {
                 {loading ? <Loading /> : postList.map((post) => {
                     return (
 
+                        
                         <div className="post-container">
                             <div className="post-header">
                                 <div className="pfp">
@@ -122,12 +123,14 @@ const Rant = ({ isAuthorized }) => {
                                     {isAuthorized && post.author.id === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}><img src={TrashIcon}/></button>}
                                 </div>
                             </div>
+                            <Link to={`/rant/${post.id}`}>
                             <h4>{post.subject}</h4>
                             <p>{post.rantPost}</p>
                             <h5>{post.date}</h5>
                             <button onClick={()=> {getIfLiked(post.id)}} id={`post-${post.id}`} className="like-button"><img src={likeButtonImg}/></button>
                             <p>{post.like} Likes</p>
                             <h3>@{post.author.name}</h3>
+                            </Link>
 
                         </div>
                     )
