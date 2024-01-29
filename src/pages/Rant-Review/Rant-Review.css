@@ -23,9 +23,8 @@
     border-radius: 20px;
     border: 2px solid black;
 }
-.post-container p, h3, h4{
+.post-container p, h3, h4, h5{
     margin-left: 5px;
-
 }
 .post-header{
     width: 100%;
@@ -34,7 +33,6 @@
     border-bottom: 2px solid rgb(116, 116, 116);
     margin-top: 5px;
 }
-
 .title{
     margin-left: auto;
     margin-right: auto;
@@ -63,11 +61,37 @@
 }
 .like-button{
     width: 5%;
-    margin-left: 10px;
+    margin-left: 5px;
+    border: none;
+    background-color: white;
 }
 .like-button img{
     width: 90%;
 }
 .like-button img:hover{
-    color: blueviolet;
+    box-shadow: 0px 0px 10px black;
+    cursor: pointer;
+}
+.post-body-container{
+    margin-bottom: 20px;
+}
+.post-info-container{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    
+}
+.post-info-container .post-date-container{
+    width: auto;
+    height: 4.5vh;
+    margin-bottom: 1vh;
+}
+.post-info-container .post-likeBtn-container{
+    width: auto;
+    height: auto;
+    margin-bottom: -2vh;
+}
+.post-info-container .likes{
+    margin-bottom: -1vh;
 }
