@@ -32,9 +32,9 @@
     background-color: rgb(212, 106, 106);
     color: white;
 }
-.pfp-image{
+a .pfp-image{
     margin-left: 5px;
-    width: 3%;
+    width: 40%;
     margin-right: 20px;
     border-radius: 50%;
     border: 3px solid white;

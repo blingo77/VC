@@ -1,25 +1,25 @@
 import './Navbar.css'
 import { Link } from 'react-router-dom';
-import {signOut} from 'firebase/auth'
-import {auth} from '../firebase-config/firebase'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase-config/firebase'
 import vcLogo from '../images/VC-Logo-White.svg'
 
-const Navbar = ({isAuthorized, setIsAuthorized}) => {
+const Navbar = ({ isAuthorized, setIsAuthorized }) => {
 
     const logout = () => {
         signOut(auth)
-        .then(() => {
-            localStorage.clear()
-            setIsAuthorized(false)
-            window.location.pathname = '/login'
-        })
+            .then(() => {
+                localStorage.clear()
+                setIsAuthorized(false)
+                window.location.pathname = '/login'
+            })
     }
 
-    return ( 
+    return (
         <div className="navBar">
-            
-            <img width="3%"src={vcLogo}></img>
-            
+
+            <img width="3%" src={vcLogo}></img>
+
 
             <Link to="/" className='title-link'>
                 <h1>Vegas Circle</h1>
@@ -34,10 +34,10 @@ const Navbar = ({isAuthorized, setIsAuthorized}) => {
                 {isAuthorized && <button className='logout-button' onClick={logout}>Logout</button>}
                 {/*<Link to='/signup'>SignUp</Link>*/}
             </div>
-            {isAuthorized && <img src={localStorage.getItem("pfp")} className='pfp-image' onError={() => { return (<img src={vcLogo}/>)}}></img>}
+            {isAuthorized && <Link to={`/profile/${auth.currentUser.uid}`}><img src={localStorage.getItem("pfp")} className='pfp-image' ></img></Link>}
 
         </div>
-     );
+    );
 }
- 
+
 export default Navbar;
