@@ -34,7 +34,7 @@ function App() {
         <Route path="/post-review" element={<PostReview isAuthorized={isAuthorized}></PostReview>}/>
         <Route path="/post-rant" element={<PostRant isAuthorized={isAuthorized}></PostRant>}/>
         <Route path="/rant/:id" element={<FullRant></FullRant>}></Route>
-        <Route path="/profile/:id" element={<UserProfile/>}/>
+        <Route path="/profile/:id" element={<UserProfile isAuthorized={isAuthorized}/>}/>
 
       </Routes>
     </div>
