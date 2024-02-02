@@ -1,8 +1,3 @@
-
-`
-is displayed if the state 'loading' is true
-`
-
 const Loading = () => {
     return ( 
         <>
