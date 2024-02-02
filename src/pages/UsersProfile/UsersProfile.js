@@ -7,24 +7,37 @@ import TrashIcon from "../../images/trash-solid.svg";
 const UserProfile = ({isAuthorized}) => {
     
     const {id} = useParams()
-    const [userPostList, setUserPostList] = useState([])
-    console.log('working')
+    const [userRantPostList, setUserPostList] = useState([])
+    const [userReviewPostList, setUserReviewPostList] = useState([])
+    const [filterPosts, setFilterPosts] = useState(true)
+    const [filterButtonText, setFilterButtonText] = useState('Rants')
 
-    const userPostCollectionRef = collection(db, 'rantPosts')
+    const userRantPostCollectionRef = collection(db, 'rantPosts')
+    const userReviewPostCollectionRef = collection(db, 'reviewPosts')
 
     //Make query for rant posts
-    const q = query(userPostCollectionRef, where('author.id', '==', id))
+    const rantQ = query(userRantPostCollectionRef, where('author.id', '==', id))
+    const reviewQ = query(userReviewPostCollectionRef, where('author.id', '==', id))
 
     useEffect(() => {
-        const unsubscribe = onSnapshot(q, (snapShot) => {
+        const unsubscribe = onSnapshot(rantQ, (snapShot) => {
             setUserPostList(snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            console.log('hi')
-            console.log(userPostList)
+            console.log(userRantPostList)
 
         })
 
         return () => unsubscribe()
 
+    }, [])
+
+    useEffect(() => {
+        const unsubscribe2 = onSnapshot(reviewQ, (snapShot) =>{
+            setUserReviewPostList(snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            console.log(userReviewPostList)
+        })
+
+        return () => unsubscribe2()
+        
     }, [])
 
     const deletePost = async (id) => {
@@ -36,7 +49,42 @@ const UserProfile = ({isAuthorized}) => {
         <>
       <div className="rant-review-page-container">
 
-            {userPostList.map((post) => {
+        <button id="postFilter"onClick={() => {
+            if(filterPosts == false){
+                setFilterPosts(true)
+                setFilterButtonText('Reviews')
+            }
+            else{
+                setFilterPosts(false)
+                setFilterButtonText('Rants')
+            }
+        }}> {filterButtonText}</button>
+
+            {!filterPosts ? 
+            
+            userReviewPostList.map((post) => {
+                return (
+                    <div className="post-container">
+                        <div className="post-header">
+                            <div className="pfp">
+                                <img src={post.pfpURL} />
+                            </div>
+                            <div className="title">
+                                <h1>{post.title}</h1>
+                            </div>
+                            <div className="delete">
+                                {isAuthorized && post.author.id === auth.currentUser.uid && <button onClick={() => { deletePost(post.id) }}><img src={TrashIcon}/></button>}
+                            </div>
+                        </div>
+                        <h2>{post.rateVal}/10</h2>
+                        <p>{post.post}</p>
+                        <h5>{post.date}</h5>
+                        <h3>@{post.author.name}</h3>
+                    </div>
+                )
+            })
+            : 
+            userRantPostList.map((post) => {
                 return (
                 <>
                  <div className="post-container">
