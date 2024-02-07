@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, serverTimestamp} from "firebase/firestore";
+import { addDoc, collection, increment, serverTimestamp} from "firebase/firestore";
 import { db, auth } from "../../../firebase-config/firebase";
 import '../Posts.css'
 import Ghost from '../../../images/unknownpfp.jpg'
@@ -65,7 +65,7 @@ const PostRant = ({ isAuthorized }) => {
             like : 0,
             likedBy: [],
             author: {
-                name: "Anonymous", email: "Anonymous@anon.com", id: auth.currentUser.uid,
+                name: "Anonymous", email: "Anonymous@anon.com", id: 'anon',
                 }
             })
         }

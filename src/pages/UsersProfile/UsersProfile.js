@@ -1,5 +1,5 @@
 import { collection, onSnapshot, query, where, deleteDoc, doc } from "firebase/firestore";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import TrashIcon from "../../images/trash-solid.svg";
@@ -14,6 +14,9 @@ const UserProfile = ({ isAuthorized }) => {
 
     // Users ID
     const { id } = useParams()
+
+    //Navigate for redirection to new pages
+    const navigate = useNavigate()
 
     // Arrays to hold users posts, map through them to get
     const [userRantPostList, setUserPostList] = useState([])
@@ -35,8 +38,6 @@ const UserProfile = ({ isAuthorized }) => {
     useEffect(() => {
         const unsubscribe = onSnapshot(rantQ, (snapShot) => {
             setUserPostList(snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            console.log(userRantPostList)
-
         })
 
         return () => unsubscribe()
@@ -47,7 +48,6 @@ const UserProfile = ({ isAuthorized }) => {
     useEffect(() => {
         const unsubscribe2 = onSnapshot(reviewQ, (snapShot) => {
             setUserReviewPostList(snapShot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-            console.log(userReviewPostList)
         })
 
         return () => unsubscribe2()
@@ -59,6 +59,11 @@ const UserProfile = ({ isAuthorized }) => {
         const postDoc = doc(db, "rantPosts", id);
         await deleteDoc(postDoc);
     };
+
+    //Handles if the post was posted Anonymously
+    if(id == 'anon'){
+        navigate('/rants')
+    }
 
     return (
         <>
