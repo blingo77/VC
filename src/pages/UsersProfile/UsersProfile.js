@@ -3,6 +3,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import TrashIcon from "../../images/trash-solid.svg";
+import './UsersProfile.css'
+import SideProfBar from "./SideProfBar";
 
 /*
  Users profile page to display all the users posts.
@@ -18,9 +20,12 @@ const UserProfile = ({ isAuthorized }) => {
     //Navigate for redirection to new pages
     const navigate = useNavigate()
 
+    const [pfp, setPfp] = useState('')
+
     // Arrays to hold users posts, map through them to get
     const [userRantPostList, setUserPostList] = useState([])
     const [userReviewPostList, setUserReviewPostList] = useState([])
+
 
     // states for the filter button
     const [filterPosts, setFilterPosts] = useState(true)
@@ -66,10 +71,14 @@ const UserProfile = ({ isAuthorized }) => {
     }
 
     return (
-        <>
+        <div className="user-prof-main-container">
+            <div className="side-prof-container">
+                <SideProfBar pfp={pfp}></SideProfBar>
+            </div>
             <div className="rant-review-page-container">
 
                 {/* filter button */}
+                <div className="filter-btn-container">
                 <button id="postFilter" onClick={() => {
                     if (filterPosts == false) {
                         setFilterPosts(true)
@@ -80,6 +89,7 @@ const UserProfile = ({ isAuthorized }) => {
                         setFilterButtonText('Rants')
                     }
                 }}> {filterButtonText}</button>
+                </div>
 
                 {/* Ternary operator to switch between rants and reviews based on state 'filterPosts' */}
                 {!filterPosts ?
@@ -87,6 +97,7 @@ const UserProfile = ({ isAuthorized }) => {
                     // Displays users review posts
                     userReviewPostList.map((post) => {
                         return (
+                            
                             <div className="post-container">
                                 <div className="post-header">
                                     <div className="pfp">
@@ -159,7 +170,7 @@ const UserProfile = ({ isAuthorized }) => {
 
                     })}
             </div>
-        </>
+        </div>
     );
 }
 

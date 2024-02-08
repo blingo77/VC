@@ -1,0 +1,26 @@
+.user-prof-main-container{
+    display: flex;
+}
+.filter-btn-container{
+    width: 30%;
+    height: auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    text-align: center;
+}
+#postFilter{
+    width: 20%;
+    height: 4vh;
+    border-radius: 20px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: rgb(70, 126, 231);
+}
+.side-prof-container{
+    width: 40%;
+    height: 600px;
+    background-color: aqua;
+    margin-right: -20%;
+}
