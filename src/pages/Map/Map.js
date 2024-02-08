@@ -17,6 +17,8 @@ const Maps = () => {
   const [searchPos, setSearchPos] = useState({lat: 36.1716, lng: -115.1391})
   const [searchList, setSearchList] = useState([])
 
+  const mapsAPIKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+
  
 function search(){
 
