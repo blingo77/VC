@@ -15,6 +15,16 @@ const Navbar = ({ isAuthorized, setIsAuthorized }) => {
             })
     }
 
+    // Fetches weather from the python flask file
+    fetch('http://127.0.0.1:5000/vc/weather/api')
+    .then(res => res.json())
+    .then(data =>{
+        console.log(data)
+    })
+    .catch(e => {
+        console.log(e)
+    })
+
     return (
         <div className="navBar">
 

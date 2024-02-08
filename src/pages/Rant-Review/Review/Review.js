@@ -44,7 +44,9 @@ const Reviews = ({ isAuthorized }) => {
                     <div className="post-container">
                         <div className="post-header">
                             <div className="pfp">
-                                <img src={post.pfpURL} />
+                                <Link to={`/profile/${post.author.id}`}>
+                                    <img src={post.pfpURL} />
+                                </Link>
                             </div>
                             <div className="title">
                                 <h1>{post.title}</h1>
