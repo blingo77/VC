@@ -2,15 +2,15 @@ import { initializeApp } from "firebase/app";
 import {GoogleAuthProvider, getAuth} from 'firebase/auth'
 import {getFirestore} from 'firebase/firestore'
 
-
+const apiK = process.env.REACT_APP_API_KEY
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAl1MDlV3YooiHiT-1Je3zrYyAb1Tgzmpc",
-    authDomain: "vegas-circle-c722c.firebaseapp.com",
-    projectId: "vegas-circle-c722c",
-    storageBucket: "vegas-circle-c722c.appspot.com",
-    messagingSenderId: "176549367428",
-    appId: "1:176549367428:web:d2d7687a4160cc616d7cd1"
+    apiKey: process.env.REACT_APP_FIREBASE_API,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 };
 
 // Initialize Firebase
