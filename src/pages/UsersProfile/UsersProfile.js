@@ -4,7 +4,6 @@ import { db, auth } from "../../firebase-config/firebase";
 import { useEffect, useState } from "react";
 import TrashIcon from "../../images/trash-solid.svg";
 import './UsersProfile.css'
-import SideProfBar from "./SideProfBar";
 
 /*
  Users profile page to display all the users posts.
