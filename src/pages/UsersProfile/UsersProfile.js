@@ -72,9 +72,7 @@ const UserProfile = ({ isAuthorized }) => {
 
     return (
         <div className="user-prof-main-container">
-            <div className="side-prof-container">
-                <SideProfBar pfp={pfp}></SideProfBar>
-            </div>
+
             <div className="rant-review-page-container">
 
                 {/* filter button */}
