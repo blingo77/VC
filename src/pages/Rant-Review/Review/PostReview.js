@@ -50,7 +50,7 @@ const PostReview = ({ isAuthorized }) => {
             pfpURL: auth.currentUser.photoURL,
             time : serverTimestamp(),
             date : postDate,
-            liked: 0,
+            like: 0,
             likedBy: [],
             author: {
                 name: auth.currentUser.displayName, email: auth.currentUser.email, id: auth.currentUser.uid,
