@@ -139,40 +139,38 @@ const Rant = ({ isAuthorized }) => {
                       )}
                   </div>
                 </div>
-                
+
                 <h4>{post.subject}</h4>
 
                 <div className="post-body-container">
-                    <Link to={`/rant/${post.id}`}>
-                        <p>{post.rantPost}</p>
-                    </Link>
+                  <Link to={`/rant/${post.id}`}>
+                    <p>{post.rantPost}</p>
+                  </Link>
                 </div>
 
                 <div className="post-info-container">
-                    <div className="post-date-container">
-                        <h5>{post.date}</h5>
-                    </div>
+                  <div className="post-date-container">
+                    <h5>{post.date}</h5>
+                  </div>
 
-                    <div className="post-likeBtn-container">
-                        <button
-                        onClick={() => {
-                            getIfLiked(post.id);
-                        }}
-                        id={`post-${post.id}`}
-                        className="like-button"
-                        >
-                        <img src={likeButtonImg} />
-                        </button>
-                    </div>
-                    
-                   
-                        <p className="likes">{post.like} Likes</p>
-                    
-                    <div>
-                        <h3>@{post.author.name}</h3>
-                    </div>
+                  <div className="post-likeBtn-container">
+                    <button
+                      onClick={() => {
+                        getIfLiked(post.id);
+                      }}
+                      id={`post-${post.id}`}
+                      className="like-button"
+                    >
+                      <img src={likeButtonImg} />
+                    </button>
+                  </div>
+
+                  <p className="likes">{post.like} Likes</p>
+
+                  <div>
+                    <h3>@{post.author.name}</h3>
+                  </div>
                 </div>
-
               </div>
             );
           })

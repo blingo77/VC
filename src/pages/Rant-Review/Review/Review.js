@@ -127,6 +127,7 @@ const Reviews = ({ isAuthorized }) => {
                             </div>
                             <h2>{post.rateVal}/10</h2>
                             <p>{post.post}</p>
+                            <div className="post-info-container">
                             <h5>{post.date}</h5>
                             <div className="post-likeBtn-container">
                                 <button className="like-button" onClick={() => {
@@ -134,7 +135,10 @@ const Reviews = ({ isAuthorized }) => {
                                 }}><img src={likeButtonImg} /></button>
                             </div>
                             <p className="likes">{post.like}</p>
-                            <h3>@{post.author.name}</h3>
+                            <div>
+                                <h3>@{post.author.name}</h3>
+                            </div>
+                        </div>
                         </div>
                     )
                 })}
