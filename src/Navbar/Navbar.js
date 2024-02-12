@@ -36,7 +36,7 @@ const Navbar = ({ isAuthorized, setIsAuthorized }) => {
             </Link>
 
             <div className="links">
-                <Link to='/news' className='nav-link'>News</Link>
+                <Link to='/news' className='nav-link'></Link>
                 <Link to='/map' className='nav-link'>Map</Link>
                 <Link to='/reviews' className='nav-link'>Reviews</Link>
                 <Link to='/rants' className='nav-link'>Rants</Link>
